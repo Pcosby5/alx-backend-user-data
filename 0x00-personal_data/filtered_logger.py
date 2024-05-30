@@ -100,3 +100,25 @@ def get_db() -> mysql.connector.connection.MySQLConnection:
         host=host,
         database=database
     )
+
+
+def main():
+    """ Main function """
+    db = get_db()
+    cursor = db.cursor(dictionary=True)
+    cursor.execute("SELECT * FROM users;")
+    rows = cursor.fetchall()
+
+    logger = get_logger()
+
+    for row in rows:
+        message = "; ".join([f"{key}={value}" for key,
+                             value in row.items()]) + ";"
+        logger.info(message)
+
+    cursor.close()
+    db.close()
+
+
+if __name__ == "__main__":
+    main()
