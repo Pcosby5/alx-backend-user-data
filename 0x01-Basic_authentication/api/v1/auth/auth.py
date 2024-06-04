@@ -25,17 +25,30 @@ class Auth:
             that do not require authentication
 
         Returns:
-            bool: False, indicating no authentication is required
+            bool: True if authentication is required, False otherwise
         """
-        return False
+        if path is None:
+            return True
+
+        if not excluded_paths:
+            return True
+
+        # Ensure path and excluded_paths are slash tolerant
+        path = path.rstrip('/') + '/'
+
+        for excluded_path in excluded_paths:
+            if excluded_path.rstrip('/') + '/' == path:
+                return False
+
+        return True
 
     def authorization_header(self, request=None) -> str:
         """
         Retrieves the authorization header from the request
 
         Args:
-            request (flask.Request, optional):
-            The Flask request object. Defaults to None.
+            request (flask.Request, optional): The Flask
+            request object. Defaults to None.
 
         Returns:
             str: None, indicating no authorization header is provided
