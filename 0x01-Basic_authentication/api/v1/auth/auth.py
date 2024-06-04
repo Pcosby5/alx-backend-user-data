@@ -11,14 +11,46 @@ User = TypeVar('User')
 
 
 class Auth:
+    """
+    Auth class to manage API authentication
+    """
+
     def require_auth(self, path: str, excluded_paths: List[str]) -> bool:
-        """ Determines if authentication is required """
+        """
+        Determines if authentication is required
+
+        Args:
+            path (str): The path to check
+            excluded_paths (List[str]): A list of paths
+            that do not require authentication
+
+        Returns:
+            bool: False, indicating no authentication is required
+        """
         return False
 
     def authorization_header(self, request=None) -> str:
-        """ Retrieves the authorization header """
+        """
+        Retrieves the authorization header from the request
+
+        Args:
+            request (flask.Request, optional):
+            The Flask request object. Defaults to None.
+
+        Returns:
+            str: None, indicating no authorization header is provided
+        """
         return None
 
     def current_user(self, request=None) -> User:
-        """ Retrieves the current user """
+        """
+        Retrieves the current user from the request
+
+        Args:
+            request (flask.Request, optional): The
+            Flask request object. Defaults to None.
+
+        Returns:
+            User: None, indicating no user is retrieved
+        """
         return None
