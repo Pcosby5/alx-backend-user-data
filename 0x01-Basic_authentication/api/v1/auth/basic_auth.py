@@ -81,17 +81,11 @@ class BasicAuth(Auth):
         """
         Retrieves the User instance for a request
         """
-        # if request is None:
-        #     return None
-
         auth_header = self.authorization_header(request)
-
 
         base64_auth = self.extract_base64_authorization_header(auth_header)
 
-
         decoded_auth = self.decode_base64_authorization_header(base64_auth)
-
 
         user_email, user_pwd = self.extract_user_credentials(decoded_auth)
 
