@@ -28,15 +28,19 @@ class Auth:
         Returns:
             bool: True if authentication is required, False otherwise
         """
-        if path is None or excluded_paths is None or not excluded_paths:
+        if path is None or not excluded_paths:
             return True
 
-        for excluded_path in excluded_paths:
-            if excluded_path.endswith('*'):
-                if path.startswith(excluded_path[:-1]):
+        if path[-1] != '/':
+            path = path + '/'
+
+        for excl_path in excluded_paths:
+            if excl_path.endswith('*'):
+                if path.startswith(excl_path[:-1]):
                     return False
-            elif path == excluded_path:
+            elif excl_path == path:
                 return False
+
         return True
 
     def authorization_header(self, request=None) -> str:
@@ -55,7 +59,7 @@ class Auth:
 
         return request.headers.get("Authorization", None)
 
-    def current_user(self, request=None) -> User:
+    def current_user(self, request=None):
         """
         Retrieves the current user from the request
 
@@ -66,7 +70,24 @@ class Auth:
         Returns:
             User: None, indicating no user is retrieved
         """
-        return None
+        if request is None:
+            return None
+
+        session_id = self.session_cookie(request)
+        if not session_id:
+            return None
+
+        user_id = self.user_id_for_session_id(session_id)
+        if not user_id:
+            return None
+
+        try:
+            from models.user import User
+            user = User.get(user_id)
+        except Exception:
+            return None
+
+        return user
 
     def session_cookie(self, request=None):
         """Return a cookie value from a request"""
