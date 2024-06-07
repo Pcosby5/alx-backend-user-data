@@ -20,6 +20,7 @@ else:
     from api.v1.auth.basic_auth import BasicAuth
     auth = BasicAuth()
 
+
 @app.before_request
 def before_request():
     """Before request handler"""
@@ -38,7 +39,6 @@ def before_request():
             abort(401)
 
         request.current_user = auth.current_user(request)
-
 
 
 @app.errorhandler(404)
