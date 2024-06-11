@@ -3,6 +3,7 @@ from user import User
 from sqlalchemy.orm.exc import NoResultFound
 from typing import Union
 import bcrypt
+import uuid
 
 
 class Auth:
@@ -33,3 +34,7 @@ class Auth:
                 password.encode('utf-8'), user.hashed_password)
         except NoResultFound:
             return False
+
+    def _generate_uuid(self) -> str:
+        """Generates a new UUID."""
+        return str(uuid.uuid4())
