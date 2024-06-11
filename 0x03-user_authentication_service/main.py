@@ -16,7 +16,6 @@ print(auth.valid_login(email, "WrongPwd"))
 
 print(auth.valid_login("unknown@email", password))
 
-
 # #!/usr/bin/env python3
 # """
 # Main file
