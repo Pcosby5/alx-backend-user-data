@@ -10,11 +10,26 @@ auth = Auth()
 
 auth.register_user(email, password)
 
-print(auth.valid_login(email, password))
+print(auth.create_session(email))
+print(auth.create_session("unknown@email.com"))
 
-print(auth.valid_login(email, "WrongPwd"))
+# #!/usr/bin/env python3
+# """
+# Main file
+# """
+# from auth import Auth
 
-print(auth.valid_login("unknown@email", password))
+# email = 'bob@bob.com'
+# password = 'MyPwdOfBob'
+# auth = Auth()
+
+# auth.register_user(email, password)
+
+# print(auth.valid_login(email, password))
+
+# print(auth.valid_login(email, "WrongPwd"))
+
+# print(auth.valid_login("unknown@email", password))
 
 # #!/usr/bin/env python3
 # """
