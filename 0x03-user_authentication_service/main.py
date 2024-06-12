@@ -1,32 +1,6 @@
 #!/usr/bin/env python3
-"""
-Main file to test Auth methods
-"""
-from auth import Auth
-
-email = 'bob@bob.com'
-password = 'MyPwdOfBob'
-auth = Auth()
-
-# Register user
-auth.register_user(email, password)
-
-# Create session
-session_id = auth.create_session(email)
-print(f"Session ID: {session_id}")
-
-# Retrieve user by session ID
-user = auth.get_user_from_session_id(session_id)
-print(f"User: {user}")
-
-# Attempt to retrieve user with invalid session ID
-invalid_user = auth.get_user_from_session_id("invalid_session_id")
-print(f"Invalid User: {invalid_user}")
-
-
-# #!/usr/bin/env python3
 # """
-# Main file
+# Main file to test Auth methods
 # """
 # from auth import Auth
 
@@ -34,10 +8,39 @@ print(f"Invalid User: {invalid_user}")
 # password = 'MyPwdOfBob'
 # auth = Auth()
 
+# # Register user
 # auth.register_user(email, password)
 
-# print(auth.create_session(email))
-# print(auth.create_session("unknown@email.com"))
+# # Create session
+# session_id = auth.create_session(email)
+# print(f"Session ID: {session_id}")
+
+# # Retrieve user by session ID
+# user = auth.get_user_from_session_id(session_id)
+# print(f"User: {user}")
+
+# # Destroy session
+# auth.destroy_session(user.id)
+# print("Session destroyed")
+
+# # Attempt to retrieve user by the same session ID
+# user_after_destroy = auth.get_user_from_session_id(session_id)
+# print(f"User after session destroy: {user_after_destroy}")
+
+# #!/usr/bin/env python3
+"""
+Main file
+"""
+from auth import Auth
+
+email = 'bob@bob.com'
+password = 'MyPwdOfBob'
+auth = Auth()
+
+auth.register_user(email, password)
+
+print(auth.create_session(email))
+print(auth.create_session("unknown@email.com"))
 
 # #!/usr/bin/env python3
 # """
